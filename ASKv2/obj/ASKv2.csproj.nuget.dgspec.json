@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj": {}
+  },
+  "projects": {
+    "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj",
+        "projectName": "ASKv2",
+        "projectPath": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj",
+        "packagesPath": "C:\\Users\\aap20\\.nuget\\packages\\",
+        "outputPath": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\3\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\aap20\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "E:\\AutoSkillCheck\\C#\\FiddlerCore-main": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "FiddlerCore5": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
