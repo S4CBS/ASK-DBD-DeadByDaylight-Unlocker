@@ -12,5 +12,5 @@
 # Статус работы
 - Полный функционал вкладки Config: В работе...
 # Скрины
-![image1](/images/window.PNG?raw=true "Окно программы")
-![image2](/images/work.PNG?raw=true "Работа программы")
+![image1](/images/window.jpg?raw=true "Окно программы")
+![image2](/images/work.jpg?raw=true "Работа программы")
