@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace ASKv2
 {
     public partial class Form1 : Form
@@ -8,6 +10,12 @@ namespace ASKv2
         {
             InitializeComponent();
             this.FormClosed += new FormClosedEventHandler(Form1_FormClosed);
+            this.MouseDown += new MouseEventHandler((o, e) =>
+            {
+                base.Capture = false;
+                Message message = Message.Create(base.Handle, 0xA1, new IntPtr(2), IntPtr.Zero);
+                this.WndProc(ref message);
+            });
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -123,6 +131,23 @@ namespace ASKv2
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                // Используем Process.Start с UseShellExecute = true для открытия ссылки в браузере
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://github.com/S4CBS/ASK-DBD-DeadByDaylight-Unlocker",
+                    UseShellExecute = true  // Включаем оболочку для открытия URL в браузере
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при попытке открыть ссылку: {ex.Message}");
+            }
         }
     }
 }

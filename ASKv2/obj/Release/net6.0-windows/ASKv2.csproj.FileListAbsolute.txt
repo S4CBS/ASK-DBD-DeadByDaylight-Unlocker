@@ -23,3 +23,4 @@ E:\AutoSkillCheck\C#\ASKv2\ASKv2\ASKv2\obj\Release\net6.0-windows\refint\ASKv2.d
 E:\AutoSkillCheck\C#\ASKv2\ASKv2\ASKv2\obj\Release\net6.0-windows\ASKv2.pdb
 E:\AutoSkillCheck\C#\ASKv2\ASKv2\ASKv2\obj\Release\net6.0-windows\ASKv2.genruntimeconfig.cache
 E:\AutoSkillCheck\C#\ASKv2\ASKv2\ASKv2\obj\Release\net6.0-windows\ref\ASKv2.dll
+E:\AutoSkillCheck\C#\ASKv2\ASKv2\ASKv2\obj\Release\net6.0-windows\ASKv2.Properties.Resources.resources
