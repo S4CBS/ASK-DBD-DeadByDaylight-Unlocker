@@ -12,6 +12,7 @@ namespace ASKv2
         public static string LocalAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static string ProfilePathASK = Path.Combine(LocalAppData, "ASK");
         public static string ProfilePath = Path.Combine(ProfilePathASK, "Configs");
+        public static string CfgProfilePath = Path.Combine(ProfilePathASK, "Config.json");
         static SessionStateHandler LaucnhedWithProfileEditor = new SessionStateHandler(ProfileEditor);
         private static string BaseDir = "https://raw.githubusercontent.com/S4CBS/ASK-DBDUnclocker/main/Configs/";
         static HttpClient WC = new HttpClient();
@@ -82,11 +83,8 @@ namespace ASKv2
             return list;
         }
 
-        public static void Start(bool IsRunning)
+        public static void CreateDirsAndFiles()
         {
-            CONFIG.IgnoreServerCertErrors = true;
-            CONFIG.EnableIPv6 = true;
-
             // Проверка на наличие конфигураций
             if (!Directory.Exists(ProfilePathASK))
             {
@@ -105,7 +103,22 @@ namespace ASKv2
                     DwnloadSettings();
                 }
             }
+
+            if (!File.Exists(CfgProfilePath))
+            {
+                var jsonData = new Dictionary<string, object>() {
+                    { "profile", "SkinsWithItems.json" }
+                };
+                string jsonContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+                File.WriteAllText(CfgProfilePath, jsonContent);
+            }
             Form1.Logs.Items.Add("Файлы конфигураций подгружены.");
+        }
+
+        public static void Start(bool IsRunning)
+        {
+            CONFIG.IgnoreServerCertErrors = true;
+            CONFIG.EnableIPv6 = true;
 
             var settings = new FiddlerCoreStartupSettingsBuilder()
                 .ListenOnPort((ushort)8888)
@@ -148,19 +161,29 @@ namespace ASKv2
 
         static void ProfileEditor(Session oSession)
         {
-            if (oSession.uriContains("/api/v1/dbd-character-data/get-all"))
+            if (Form1.Profile == "SkinsWithItems.json")
             {
-                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Profile.json");
-            }
-            if (oSession.uriContains("/api/v1/dbd-character-data/bloodweb"))
-            {
-                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Bloodweb.json");
-            }
+                if (oSession.uriContains("/api/v1/dbd-character-data/get-all"))
+                {
+                    oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Profile.json");
+                }
+                if (oSession.uriContains("/api/v1/dbd-character-data/bloodweb"))
+                {
+                    oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Bloodweb.json");
+                }
 
 
-            if (oSession.uriContains("/api/v1/inventories"))
+                if (oSession.uriContains("/api/v1/inventories"))
+                {
+                    oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, Form1.Profile);
+                }
+            }
+            else 
             {
-                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "SkinsWithItems.json");
+                if (oSession.uriContains("/api/v1/inventories"))
+                {
+                    oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, Form1.Profile);
+                }
             }
         }
 

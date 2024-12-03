@@ -3,6 +3,7 @@ namespace ASKv2
     public partial class Form1 : Form
     {
         public static bool signal;
+        public static string Profile = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -11,6 +12,9 @@ namespace ASKv2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Program.CreateDirsAndFiles();
+            string comboBoxLoad = Utils.ReturnProfile();
+            comboBoxLoad = Path.GetFileNameWithoutExtension(comboBoxLoad);
             Logs.View = View.Details;
             Logs.Columns.Add("                                               Logs", 350);
             try
@@ -19,7 +23,13 @@ namespace ASKv2
                 textBox2.Text = prestigeLevel;
             }
             catch
-            {}
+            { }
+            comboBox1.Items.Add("SkinsWithItems");
+            comboBox1.Items.Add("DlcOnly");
+            comboBox1.Items.Add("SkinsPerks");
+            comboBox1.Items.Add("SkinsONLY");
+            comboBox1.SelectedItem = comboBoxLoad;
+            label3.Text = $"Профиль: {comboBoxLoad}";
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -53,6 +63,7 @@ namespace ASKv2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Profile = Utils.ReturnProfile();
             Program.Start(true);
             string StartStopLog = Program.ReturnStartSignal(true);
             Logs.Items.Add(StartStopLog);
@@ -77,7 +88,41 @@ namespace ASKv2
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void Logs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = comboBox1.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                string selectedText = comboBox1.Items[selectedIndex].ToString() + ".json";
+                Logs.Items.Add($"Выбран профиль: {selectedText}");
+                label3.Text = $"Профиль: {Path.GetFileNameWithoutExtension(selectedText)}";
+                Utils.SetProfile(selectedText);
+                MessageBox.Show($"Профиль {selectedText} установлен.", "Выбор профиля");
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
