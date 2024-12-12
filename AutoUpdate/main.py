@@ -2,13 +2,16 @@ import json
 import time
 from tkinter import messagebox
 import traceback
+import os
+
+local_path = os.path.join(os.environ["LOCALAPPDATA"])
 
 # Configuration paths
 cfg_paths = [
-    r"C:\Users\aap20\AppData\Local\ASK\Configs\SkinsWithItems.json",  # 0
-    r"C:\Users\aap20\AppData\Local\ASK\Configs\SkinsPerks.json",  # 1
-    r"C:\Users\aap20\AppData\Local\ASK\Configs\DlcOnly.json",  # 2
-    r"C:\Users\aap20\AppData\Local\ASK\Configs\SkinsONLY.json"  # 3
+    rf"{local_path}\ASK\Configs\SkinsWithItems.json",  # 0
+    rf"{local_path}\ASK\Configs\SkinsPerks.json",  # 1
+    rf"{local_path}\ASK\Configs\DlcOnly.json",  # 2
+    rf"{local_path}\ASK\Configs\SkinsONLY.json"  # 3
 ]
 
 
@@ -76,7 +79,7 @@ def process_items(upd_file, cur_outfit, cfg_path):
 
 # Main execution
 try:
-    upd_file = read_json(r"C:\Users\aap20\AppData\Local\ASK\Configs\AutoUpdate.json")
+    upd_file = read_json(rf"{local_path}\ASK\Configs\AutoUpdate.json")
     for cfg_path in cfg_paths:
         cur_file = read_json(cfg_path)
         cur_outfit = [item["objectId"] for item in cur_file["data"]["inventory"] if item["quantity"]]
