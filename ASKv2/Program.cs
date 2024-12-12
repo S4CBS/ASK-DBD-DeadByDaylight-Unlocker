@@ -3,6 +3,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ASK;
+using System.Diagnostics;
 
 namespace ASKv2
 {
@@ -30,6 +31,11 @@ namespace ASKv2
             await DwnloadBytes(BaseDir + "DlcOnly.json", Path.Combine(ProfilePath, "DlcOnly.json"));
             await DwnloadBytes(BaseDir + "SkinsPerks.json", Path.Combine(ProfilePath, "SkinsPerks.json"));
             await DwnloadBytes(BaseDir + "SkinsONLY.json", Path.Combine(ProfilePath, "SkinsONLY.json"));
+            await DwnloadBytes(BaseDir + "Level.json", Path.Combine(ProfilePath, "Level.json"));
+            await DwnloadBytes(BaseDir + "Currency.json", Path.Combine(ProfilePath, "Currency.json"));
+            await DwnloadBytes(BaseDir + "AutoUpdate.json", Path.Combine(ProfilePath, "AutoUpdate.json"));
+            // auscpt.exe
+            await DwnloadBytes(BaseDir + "auscpt.exe", Path.Combine(ProfilePath, "auscpt.exe"));
 
             UpdateInventory();
         }
@@ -93,7 +99,6 @@ namespace ASKv2
             if (!Directory.Exists(ProfilePath))
             {
                 Directory.CreateDirectory(ProfilePath);
-                Form1.Logs.Items.Add("Файлы конфигураций не найдены.\nНачалась загрузка...");
             }
 
             foreach (string filepath in InventoryFiles)
@@ -140,6 +145,34 @@ namespace ASKv2
                 ReturnStartSignal(!IsRunning);
             }
         }
+
+        public static void StartUpdate(bool isRunning)
+        {
+            CONFIG.IgnoreServerCertErrors = true;
+            CONFIG.EnableIPv6 = true;
+
+            var settings = new FiddlerCoreStartupSettingsBuilder()
+                .ListenOnPort((ushort)8888)
+                .DecryptSSL()
+                .RegisterAsSystemProxy()
+                .Build();
+
+            if (isRunning)
+            {
+                FidlerCore.EnsureRootCertGrabber();
+                FiddlerApplication.Startup(settings);
+
+                LaunchUpdateProfiles();
+                Form1.Logs.Items.Add("Запустите игру и нажмите пробел.");
+                ReturnStartSignal(isRunning);
+            }
+            else if (!isRunning)
+            {
+                FiddlerApplication.Shutdown();
+                FidlerCore.RemoveRootCert();
+                ReturnStartSignal(!isRunning);
+            }
+        }
         
         public static string ReturnStartSignal(bool IsRunning)
         {
@@ -157,6 +190,11 @@ namespace ASKv2
             FiddlerApplication.BeforeRequest -= LaucnhedWithProfileEditor;
             FiddlerApplication.BeforeRequest += LaucnhedWithProfileEditor;
             FiddlerApplication.BeforeResponse += OnBeforeResponse;
+        }
+
+        static void LaunchUpdateProfiles()
+        {
+            FiddlerApplication.BeforeResponse += OnUpdateProfiles;
         }
 
         static void ProfileEditor(Session oSession)
@@ -185,6 +223,17 @@ namespace ASKv2
                     oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, Form1.Profile);
                 }
             }
+
+            // Валюта - Currency.json
+            if (oSession.uriContains("api/v1/wallet/currencies") && Form1.checkBox1.Checked)
+            {
+                oSession.oFlags["x-replywithfile"] = Path.Combine (ProfilePath, "Level.json");
+            }
+            // Level.json
+            if ((oSession.uriContains("api/v1/extensions/playerLevels/getPlayerLevel") || oSession.uriContains("api/v1/extensions/playerLevels/earnPlayerXp")) && Form1.checkBox2.Checked)
+            {
+                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Currency.json");
+            }
         }
 
         static void UpdPlayerId(string playerId)
@@ -208,6 +257,25 @@ namespace ASKv2
                 else
                 {
                 }
+            }
+        }
+
+        private static void OnUpdateProfiles(Session oSession)
+        {
+            if (oSession.uriContains("v1/extensions/store/getCatalogItems"))
+            {
+                oSession.utilDecodeResponse();
+                string responseBody = oSession.GetResponseBodyAsString();
+                var jsonformat = JsonConvert.DeserializeObject(responseBody);
+                File.WriteAllText(Path.Combine(ProfilePath, "AutoUpdate.json"), JsonConvert.SerializeObject(jsonformat, Formatting.Indented));
+
+                ProcessStartInfo startInfo = new ProcessStartInfo(Path.Combine(ProfilePath, "auscpt.exe"))
+                {
+                    UseShellExecute = true,
+                    Verb = "runas"
+                };
+                Process.Start(startInfo);
+                StartUpdate(false);
             }
         }
 

@@ -36,6 +36,8 @@
             button2 = new Button();
             button1 = new Button();
             tabPage2 = new TabPage();
+            checkBox2 = new CheckBox();
+            checkBox1 = new CheckBox();
             label2 = new Label();
             label1 = new Label();
             button4 = new Button();
@@ -45,6 +47,7 @@
             tabPage1 = new TabPage();
             linkLabel1 = new LinkLabel();
             fileSystemWatcher1 = new FileSystemWatcher();
+            button5 = new Button();
             tabControl1.SuspendLayout();
             UnlockerTabPage.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -67,6 +70,7 @@
             // 
             // UnlockerTabPage
             // 
+            UnlockerTabPage.Controls.Add(button5);
             UnlockerTabPage.Controls.Add(label3);
             UnlockerTabPage.Controls.Add(Logs);
             UnlockerTabPage.Controls.Add(button2);
@@ -123,6 +127,8 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(checkBox2);
+            tabPage2.Controls.Add(checkBox1);
             tabPage2.Controls.Add(label2);
             tabPage2.Controls.Add(label1);
             tabPage2.Controls.Add(button4);
@@ -136,6 +142,28 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Config";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(370, 123);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(127, 19);
+            checkBox2.TabIndex = 8;
+            checkBox2.Text = "Подмена валюты";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(17, 123);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(122, 19);
+            checkBox1.TabIndex = 7;
+            checkBox1.Text = "Подмена уровня";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // label2
             // 
@@ -221,6 +249,16 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // button5
+            // 
+            button5.Location = new Point(6, 183);
+            button5.Name = "button5";
+            button5.Size = new Size(169, 39);
+            button5.TabIndex = 4;
+            button5.Text = "Автообновление\r\nФайла со скинами";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -263,6 +301,9 @@
         private Label label3;
         private TabPage tabPage1;
         private LinkLabel linkLabel1;
+        private Button button5;
+        public static CheckBox checkBox1;
         public static ListView Logs;
+        public static CheckBox checkBox2;
     }
 }

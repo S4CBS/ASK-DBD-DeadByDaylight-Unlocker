@@ -1003,19 +1003,19 @@
   },
   "packageFolders": {
     "C:\\Users\\aap20\\.nuget\\packages\\": {},
-    "D:\\3\\NuGetPackages": {}
+    "E:\\VScodeshared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj",
+      "projectUniqueName": "E:\\ASK-DBD-DeadByDaylight-Unlocker-main\\ASKv2\\ASKv2.csproj",
       "projectName": "ASKv2",
-      "projectPath": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj",
+      "projectPath": "E:\\ASK-DBD-DeadByDaylight-Unlocker-main\\ASKv2\\ASKv2.csproj",
       "packagesPath": "C:\\Users\\aap20\\.nuget\\packages\\",
-      "outputPath": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\obj\\",
+      "outputPath": "E:\\ASK-DBD-DeadByDaylight-Unlocker-main\\ASKv2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\3\\NuGetPackages"
+        "E:\\VScodeshared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\aap20\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1027,7 +1027,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "E:\\AutoSkillCheck\\C#\\FiddlerCore-main": {},
+        "E:\\ASK-DBD-DeadByDaylight-Unlocker-main\\FiddlerCoreLib": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1044,7 +1044,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -1080,20 +1080,8 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "У пакета \"DotNetZip\" 1.13.4 есть известная уязвимость https://github.com/advisories/GHSA-xhg6-9j5j-w4vf (уровень серьезности: высокий)",
-      "libraryId": "DotNetZip",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  }
 }

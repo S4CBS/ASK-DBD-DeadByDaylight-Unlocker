@@ -1,0 +1,12 @@
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.exe
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\BasicFormatsForCore.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.deps.json
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.runtimeconfig.json
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.pdb
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\BCMakeCert.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\DotNetZip.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\FiddlerCore.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\Telerik.NetworkConnections.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\Newtonsoft.Json.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\System.ComponentModel.Composition.dll

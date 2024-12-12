@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2xopfhX9riA=",
+  "dgSpecHash": "vr16A6mSeIs=",
   "success": true,
-  "projectFilePath": "E:\\AutoSkillCheck\\C#\\ASKv2\\ASKv2\\ASKv2\\ASKv2.csproj",
+  "projectFilePath": "E:\\ASK-DBD-DeadByDaylight-Unlocker-main\\ASKv2\\ASKv2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aap20\\.nuget\\packages\\bcmakecert\\2.0.9\\bcmakecert.2.0.9.nupkg.sha512",
     "C:\\Users\\aap20\\.nuget\\packages\\dotnetzip\\1.13.4\\dotnetzip.1.13.4.nupkg.sha512",
@@ -24,16 +24,5 @@
     "C:\\Users\\aap20\\.nuget\\packages\\system.text.encoding.codepages\\4.5.0\\system.text.encoding.codepages.4.5.0.nupkg.sha512",
     "C:\\Users\\aap20\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "У пакета \"DotNetZip\" 1.13.4 есть известная уязвимость https://github.com/advisories/GHSA-xhg6-9j5j-w4vf (уровень серьезности: высокий)",
-      "libraryId": "DotNetZip",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }
