@@ -10,6 +10,7 @@ namespace ASKv2
         public static bool LevelHack;
         public static bool CurrencyHack;
         private static bool updSignal;
+        public static string platform = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -30,12 +31,20 @@ namespace ASKv2
             }
             catch
             { }
+            // Загрузка профиля игрока
             comboBox1.Items.Add("SkinsWithItems");
             comboBox1.Items.Add("DlcOnly");
             comboBox1.Items.Add("SkinsPerks");
             comboBox1.Items.Add("SkinsONLY");
             comboBox1.SelectedItem = comboBoxLoad;
             label3.Text = $"Профиль: {comboBoxLoad}";
+            // Загрузка платформы игрока
+            platform = Utils.ReturnPlatform();
+            comboBox2.Items.Add("EGS");
+            comboBox2.Items.Add("Steam");
+            comboBox2.Items.Add("MS");
+            comboBox2.SelectedItem = platform;
+            label4.Text = $"Платформа: {platform}";
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -116,6 +125,19 @@ namespace ASKv2
             }
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = comboBox2.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                string selectedText = comboBox2.Items[selectedIndex].ToString();
+                Logs.Items.Add($"Выбран профиль: {selectedText}");
+                label4.Text = $"Профиль: {Path.GetFileNameWithoutExtension(selectedText)}";
+                Utils.SetPlatform(selectedText);
+            }
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -169,6 +191,11 @@ namespace ASKv2
             {
                 Program.StartUpdate(updSignal);
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

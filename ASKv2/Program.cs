@@ -112,7 +112,7 @@ namespace ASKv2
             if (!File.Exists(CfgProfilePath))
             {
                 var jsonData = new Dictionary<string, object>() {
-                    { "profile", "SkinsWithItems.json" }
+                    { "profile", "SkinsWithItems.json" }, {"platform", "EGS"}
                 };
                 string jsonContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
                 File.WriteAllText(CfgProfilePath, jsonContent);
@@ -138,9 +138,11 @@ namespace ASKv2
 
                 LauchProfileEditor();
                 ReturnStartSignal(IsRunning);
+                Launcher.LaunchDBD(Form1.platform);
             } else if (!IsRunning)
             {
                 FiddlerApplication.Shutdown();
+                Launcher.KillDBD(Form1.platform);
                 FidlerCore.RemoveRootCert();
                 ReturnStartSignal(!IsRunning);
             }
@@ -163,14 +165,15 @@ namespace ASKv2
                 FiddlerApplication.Startup(settings);
 
                 LaunchUpdateProfiles();
-                Form1.Logs.Items.Add("Запустите игру и нажмите пробел.");
                 ReturnStartSignal(isRunning);
+                Launcher.LaunchDBD(Form1.platform);
             }
             else if (!isRunning)
             {
                 FiddlerApplication.Shutdown();
+                Launcher.KillDBD(Form1.platform);
                 FidlerCore.RemoveRootCert();
-                ReturnStartSignal(!isRunning);
+                ReturnStartSignal(!isRunning); 
             }
         }
         

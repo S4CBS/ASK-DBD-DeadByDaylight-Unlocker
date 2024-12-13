@@ -93,5 +93,29 @@ namespace ASKv2
             string FinalJson = JsonConvert.SerializeObject(SettingsObj);
             File.WriteAllText(Program.CfgProfilePath, FinalJson);
         }
+        internal static string ReturnPlatform()
+        {
+            string JSON = File.ReadAllText(Program.CfgProfilePath);
+            var SettingsObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(JSON);
+
+            if (SettingsObj != null && SettingsObj.ContainsKey("platform"))
+            {
+                return SettingsObj["platform"].ToString();
+            }
+            return "";
+        }
+        public static void SetPlatform(string platform)
+        {
+            string JSON = File.ReadAllText(Program.CfgProfilePath);
+            var SettingsObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(JSON);
+
+            if (SettingsObj != null && SettingsObj.ContainsKey("platform"))
+            {
+                SettingsObj["platform"] = platform;
+            }
+
+            string FinalJson = JsonConvert.SerializeObject(SettingsObj);
+            File.WriteAllText(Program.CfgProfilePath, FinalJson);
+        }
     }
 }

@@ -31,11 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tabControl1 = new TabControl();
             UnlockerTabPage = new TabPage();
+            label4 = new Label();
+            button5 = new Button();
             label3 = new Label();
             Logs = new ListView();
             button2 = new Button();
             button1 = new Button();
             tabPage2 = new TabPage();
+            button6 = new Button();
+            comboBox2 = new ComboBox();
             checkBox2 = new CheckBox();
             checkBox1 = new CheckBox();
             label2 = new Label();
@@ -47,7 +51,6 @@
             tabPage1 = new TabPage();
             linkLabel1 = new LinkLabel();
             fileSystemWatcher1 = new FileSystemWatcher();
-            button5 = new Button();
             tabControl1.SuspendLayout();
             UnlockerTabPage.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -70,6 +73,7 @@
             // 
             // UnlockerTabPage
             // 
+            UnlockerTabPage.Controls.Add(label4);
             UnlockerTabPage.Controls.Add(button5);
             UnlockerTabPage.Controls.Add(label3);
             UnlockerTabPage.Controls.Add(Logs);
@@ -83,6 +87,26 @@
             UnlockerTabPage.TabIndex = 0;
             UnlockerTabPage.Text = "Unlocker";
             UnlockerTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BorderStyle = BorderStyle.FixedSingle;
+            label4.Location = new Point(8, 266);
+            label4.Name = "label4";
+            label4.Size = new Size(42, 17);
+            label4.TabIndex = 5;
+            label4.Text = "label4";
+            // 
+            // button5
+            // 
+            button5.Location = new Point(6, 183);
+            button5.Name = "button5";
+            button5.Size = new Size(169, 39);
+            button5.TabIndex = 4;
+            button5.Text = "Автообновление\r\nФайла со скинами";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // label3
             // 
@@ -127,6 +151,8 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button6);
+            tabPage2.Controls.Add(comboBox2);
             tabPage2.Controls.Add(checkBox2);
             tabPage2.Controls.Add(checkBox1);
             tabPage2.Controls.Add(label2);
@@ -142,6 +168,25 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Config";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(14, 206);
+            button6.Name = "button6";
+            button6.Size = new Size(135, 29);
+            button6.TabIndex = 10;
+            button6.Text = "Выбрать платформу";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(14, 168);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(121, 23);
+            comboBox2.TabIndex = 9;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // checkBox2
             // 
@@ -249,16 +294,6 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // button5
-            // 
-            button5.Location = new Point(6, 183);
-            button5.Name = "button5";
-            button5.Size = new Size(169, 39);
-            button5.TabIndex = 4;
-            button5.Text = "Автообновление\r\nФайла со скинами";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -302,6 +337,9 @@
         private TabPage tabPage1;
         private LinkLabel linkLabel1;
         private Button button5;
+        private Button button6;
+        private ComboBox comboBox2;
+        private Label label4;
         public static CheckBox checkBox1;
         public static ListView Logs;
         public static CheckBox checkBox2;
