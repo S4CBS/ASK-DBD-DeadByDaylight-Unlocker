@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 using ASK;
 using System.Diagnostics;
 
+public delegate void LoggingDelegate(string log);
+
 namespace ASKv2
 {
     internal static class Program
@@ -17,6 +19,8 @@ namespace ASKv2
         static SessionStateHandler LaucnhedWithProfileEditor = new SessionStateHandler(ProfileEditor);
         private static string BaseDir = "https://raw.githubusercontent.com/S4CBS/ASK-DBDUnclocker/main/Configs/";
         static HttpClient WC = new HttpClient();
+        static LoggingDelegate logger = Utils.Logging;
+
         [STAThread]
         static void Main()
         {
@@ -34,6 +38,7 @@ namespace ASKv2
             await DwnloadBytes(BaseDir + "Level.json", Path.Combine(ProfilePath, "Level.json"));
             await DwnloadBytes(BaseDir + "Currency.json", Path.Combine(ProfilePath, "Currency.json"));
             await DwnloadBytes(BaseDir + "AutoUpdate.json", Path.Combine(ProfilePath, "AutoUpdate.json"));
+            await DwnloadBytes(BaseDir + "changeName.json", Path.Combine(ProfilePath, "changeName.json"));
             // auscpt.exe
             await DwnloadBytes(BaseDir + "auscpt.exe", Path.Combine(ProfilePath, "auscpt.exe"));
 
@@ -112,7 +117,7 @@ namespace ASKv2
             if (!File.Exists(CfgProfilePath))
             {
                 var jsonData = new Dictionary<string, object>() {
-                    { "profile", "SkinsWithItems.json" }, {"platform", "EGS"}
+                    { "profile", "SkinsWithItems.json" }, {"platform", "EGS"}, {"nicknamehack", "xxx"}
                 };
                 string jsonContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
                 File.WriteAllText(CfgProfilePath, jsonContent);
@@ -228,14 +233,19 @@ namespace ASKv2
             }
 
             // Валюта - Currency.json
-            if (oSession.uriContains("api/v1/wallet/currencies") && Form1.checkBox1.Checked)
+            if (oSession.uriContains("api/v1/wallet/currencies") && Form1.checkBox2.Checked)
+            {
+                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Currency.json");
+            }
+            // Level.json
+            if ((oSession.uriContains("api/v1/extensions/playerLevels/getPlayerLevel") || oSession.uriContains("api/v1/extensions/playerLevels/earnPlayerXp")) && Form1.checkBox1.Checked)
             {
                 oSession.oFlags["x-replywithfile"] = Path.Combine (ProfilePath, "Level.json");
             }
-            // Level.json
-            if ((oSession.uriContains("api/v1/extensions/playerLevels/getPlayerLevel") || oSession.uriContains("api/v1/extensions/playerLevels/earnPlayerXp")) && Form1.checkBox2.Checked)
+            // Подмена ника - epic/id/v2/sdk/accounts
+            if (oSession.uriContains("epic/id/v2/sdk/accounts") && Form1.checkBox3.Checked)
             {
-                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "Currency.json");
+                oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "changeName.json");
             }
         }
 
@@ -284,6 +294,10 @@ namespace ASKv2
 
         private static void OnBeforeResponse(Session oSession)
         {
+            string accountId = string.Empty;
+            string displayName = string.Empty;
+            string preferredLanguage = string.Empty;
+
             if (oSession.uriContains("v1/auth/provider"))
             {
                 oSession.utilDecodeResponse();
@@ -299,6 +313,20 @@ namespace ASKv2
                 else
                 {
                 }
+            }
+            if (oSession.uriContains("epic/oauth/v2/token"))
+            {
+                oSession.utilDecodeResponse();
+                string responseBody = oSession.GetResponseBodyAsString();
+                JObject JSON = JsonConvert.DeserializeObject<JObject>(responseBody);
+
+                if (JSON != null && JSON.ContainsKey("account_id"))
+                {
+                    accountId = JSON["account_id"].ToString();
+                    preferredLanguage = "en";
+                    displayName = Form1.playerName;
+                }
+                Utils.AutoSetName(accountId, displayName, preferredLanguage);
             }
         }
 

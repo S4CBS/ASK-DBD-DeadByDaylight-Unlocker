@@ -3,6 +3,7 @@ E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.dll
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.deps.json
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.runtimeconfig.json
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.dll.config
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\ASKv2.pdb
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\BCMakeCert.dll
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\publish\DotNetZip.dll

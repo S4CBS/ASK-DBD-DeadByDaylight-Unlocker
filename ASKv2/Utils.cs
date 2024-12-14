@@ -117,5 +117,66 @@ namespace ASKv2
             string FinalJson = JsonConvert.SerializeObject(SettingsObj);
             File.WriteAllText(Program.CfgProfilePath, FinalJson);
         }
+
+        public static string ReturnName()
+        {
+            string JSON = File.ReadAllText(Program.CfgProfilePath);
+            var SettingsObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(JSON);
+
+            if (SettingsObj != null && SettingsObj.ContainsKey("nicknamehack"))
+            {
+                return SettingsObj["nicknamehack"].ToString();
+            }
+            return "";
+        }
+
+        public static void SetName_(string username)
+        {
+            string JSON = File.ReadAllText(Program.CfgProfilePath);
+            var SettingsObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(JSON);
+
+            if (SettingsObj != null && SettingsObj.ContainsKey("nicknamehack"))
+            {
+                SettingsObj["nicknamehack"] = username;
+            }
+
+            string FinalJson = JsonConvert.SerializeObject(SettingsObj);
+            File.WriteAllText(Program.CfgProfilePath, FinalJson);
+        }
+
+        public static void AutoSetName(string id, string name, string lang)
+        {
+            string json = File.ReadAllText(Path.Combine(Program.ProfilePath, "changeName.json"));
+            JArray jsonArray = JsonConvert.DeserializeObject<JArray>(json);
+            
+            foreach (var item in jsonArray)
+            {
+                item["accountId"] = id;
+                item["displayName"] = name;
+                item["preferredLanguage"] = lang;
+                break;
+            }
+            string updateJson = JsonConvert.SerializeObject(jsonArray, Formatting.None);
+            File.WriteAllText(Path.Combine(Program.ProfilePath, "changeName.json"), updateJson);
+        }
+
+        public static void SetName(string name)
+        {
+            string json = File.ReadAllText(Path.Combine(Program.ProfilePath, "changeName.json"));
+            JArray jsonArray = JsonConvert.DeserializeObject<JArray>(json);
+
+            foreach (var item in jsonArray)
+            {
+                item["displayName"] = name;
+                break;
+            }
+            string updateJson = JsonConvert.SerializeObject(jsonArray, Formatting.None);
+            File.WriteAllText(Path.Combine(Program.ProfilePath, "changeName.json"), updateJson);
+        }
+
+        public static void Logging(string log)
+        {
+            Form1.Logs.Items.Add(log);
+        }
     }
 }

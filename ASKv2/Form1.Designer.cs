@@ -38,6 +38,9 @@
             button2 = new Button();
             button1 = new Button();
             tabPage2 = new TabPage();
+            button7 = new Button();
+            textBox1 = new TextBox();
+            checkBox3 = new CheckBox();
             button6 = new Button();
             comboBox2 = new ComboBox();
             checkBox2 = new CheckBox();
@@ -51,6 +54,7 @@
             tabPage1 = new TabPage();
             linkLabel1 = new LinkLabel();
             fileSystemWatcher1 = new FileSystemWatcher();
+            label5 = new Label();
             tabControl1.SuspendLayout();
             UnlockerTabPage.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -73,6 +77,7 @@
             // 
             // UnlockerTabPage
             // 
+            UnlockerTabPage.Controls.Add(label5);
             UnlockerTabPage.Controls.Add(label4);
             UnlockerTabPage.Controls.Add(button5);
             UnlockerTabPage.Controls.Add(label3);
@@ -151,6 +156,9 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(button7);
+            tabPage2.Controls.Add(textBox1);
+            tabPage2.Controls.Add(checkBox3);
             tabPage2.Controls.Add(button6);
             tabPage2.Controls.Add(comboBox2);
             tabPage2.Controls.Add(checkBox2);
@@ -169,9 +177,36 @@
             tabPage2.Text = "Config";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            button7.Location = new Point(21, 256);
+            button7.Name = "button7";
+            button7.Size = new Size(114, 23);
+            button7.TabIndex = 13;
+            button7.Text = "Подменить ник";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(16, 212);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(119, 23);
+            textBox1.TabIndex = 12;
+            // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Location = new Point(141, 206);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(117, 34);
+            checkBox3.TabIndex = 11;
+            checkBox3.Text = "Подменить ник\r\nOn/Off";
+            checkBox3.UseVisualStyleBackColor = true;
+            // 
             // button6
             // 
-            button6.Location = new Point(14, 206);
+            button6.Location = new Point(16, 162);
             button6.Name = "button6";
             button6.Size = new Size(135, 29);
             button6.TabIndex = 10;
@@ -182,7 +217,7 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(14, 168);
+            comboBox2.Location = new Point(16, 119);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(121, 23);
             comboBox2.TabIndex = 9;
@@ -202,7 +237,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(17, 123);
+            checkBox1.Location = new Point(217, 123);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(122, 19);
             checkBox1.TabIndex = 7;
@@ -294,6 +329,16 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BorderStyle = BorderStyle.FixedSingle;
+            label5.Location = new Point(8, 236);
+            label5.Name = "label5";
+            label5.Size = new Size(42, 17);
+            label5.TabIndex = 6;
+            label5.Text = "label5";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -340,8 +385,12 @@
         private Button button6;
         private ComboBox comboBox2;
         private Label label4;
+        public static CheckBox checkBox3;
+        private Button button7;
+        private TextBox textBox1;
         public static CheckBox checkBox1;
         public static ListView Logs;
         public static CheckBox checkBox2;
+        private Label label5;
     }
 }

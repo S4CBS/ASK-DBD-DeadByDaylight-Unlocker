@@ -11,6 +11,7 @@ namespace ASKv2
         public static bool CurrencyHack;
         private static bool updSignal;
         public static string platform = string.Empty;
+        public static string playerName = "xxx";
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +46,10 @@ namespace ASKv2
             comboBox2.Items.Add("MS");
             comboBox2.SelectedItem = platform;
             label4.Text = $"Платформа: {platform}";
+            // Загрузка Nickname спуфера
+            playerName = Utils.ReturnName();
+            label5.Text = $"Ник: {playerName}";
+            textBox1.Text = playerName;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -196,6 +201,14 @@ namespace ASKv2
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string text = $"Ник: {textBox1.Text}";
+            label5.Text = text;
+            playerName = textBox1.Text;
+            Utils.SetName_(playerName);
         }
     }
 }
