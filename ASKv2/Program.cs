@@ -352,7 +352,15 @@ namespace ASKv2
                     {
                         Form1.label6.Text = $"Ваша позиция: {JSON["queueData"]["position"].ToString()}";
                     }
+                    if (JSON["status"].ToString() == "MATCHED")
+                    {
+                            Form1.label6.Text = "МАТЧ НАЙДЕН!";
+                    }
                 }
+            }
+            if (oSession.uriContains("api/v1/queue/cancel"))
+            {
+                Form1.label6.Text = "Очередь: xxx";
             }
         }
 
