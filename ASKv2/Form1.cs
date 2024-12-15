@@ -137,6 +137,7 @@ namespace ASKv2
             if (selectedIndex != -1)
             {
                 string selectedText = comboBox2.Items[selectedIndex].ToString();
+                platform = selectedText;
                 Logs.Items.Add($"Выбран профиль: {selectedText}");
                 label4.Text = $"Профиль: {Path.GetFileNameWithoutExtension(selectedText)}";
                 Utils.SetPlatform(selectedText);
@@ -209,6 +210,11 @@ namespace ASKv2
             label5.Text = text;
             playerName = textBox1.Text;
             Utils.SetName_(playerName);
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

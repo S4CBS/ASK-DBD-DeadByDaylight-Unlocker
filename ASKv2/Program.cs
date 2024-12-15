@@ -4,13 +4,15 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ASK;
 using System.Diagnostics;
-
-public delegate void LoggingDelegate(string log);
+using System.Runtime.InteropServices;
 
 namespace ASKv2
 {
     internal static class Program
     {
+        [DllImport("kernel32.dll")]
+        static extern bool AllocConsole();
+
         public static string MyPlayerId = string.Empty;
         public static string LocalAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static string ProfilePathASK = Path.Combine(LocalAppData, "ASK");
@@ -19,7 +21,6 @@ namespace ASKv2
         static SessionStateHandler LaucnhedWithProfileEditor = new SessionStateHandler(ProfileEditor);
         private static string BaseDir = "https://raw.githubusercontent.com/S4CBS/ASK-DBDUnclocker/main/Configs/";
         static HttpClient WC = new HttpClient();
-        static LoggingDelegate logger = Utils.Logging;
 
         [STAThread]
         static void Main()
@@ -43,6 +44,11 @@ namespace ASKv2
             await DwnloadBytes(BaseDir + "auscpt.exe", Path.Combine(ProfilePath, "auscpt.exe"));
 
             UpdateInventory();
+        }
+        public static void AttachConsole()
+        {
+            AllocConsole(); // Создаёт новое консольное окно
+            Console.WriteLine("Консоль подключена!");
         }
 
         public static List<string> InventoryFiles = new List<string>() {
@@ -138,6 +144,8 @@ namespace ASKv2
 
             if (IsRunning)
             {
+                // AttachConsole();
+                // Console.Title = "Debuging";
                 FidlerCore.EnsureRootCertGrabber();
                 FiddlerApplication.Startup(settings);
 
@@ -191,6 +199,11 @@ namespace ASKv2
             else {
                 return "Скрипт выклюнен, закройте игру.";
             }
+        }
+
+        private static void Log(string log)
+        {
+            Utils.Logging(log);
         }
 
         static void LauchProfileEditor()
@@ -327,6 +340,19 @@ namespace ASKv2
                     displayName = Form1.playerName;
                 }
                 Utils.AutoSetName(accountId, displayName, preferredLanguage);
+            }
+            if (oSession.uriContains("api/v1/queue"))
+            {
+                oSession.utilDecodeResponse();
+                string responseBody = oSession.GetResponseBodyAsString();
+                JObject JSON = JsonConvert.DeserializeObject<JObject>(responseBody);
+                if (JSON != null)
+                {
+                    if (JSON["status"].ToString() == "QUEUED")
+                    {
+                        Form1.label6.Text = $"Ваша позиция: {JSON["queueData"]["position"].ToString()}";
+                    }
+                }
             }
         }
 

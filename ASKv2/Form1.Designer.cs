@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tabControl1 = new TabControl();
             UnlockerTabPage = new TabPage();
+            label6 = new Label();
+            label5 = new Label();
             label4 = new Label();
             button5 = new Button();
             label3 = new Label();
@@ -54,7 +56,6 @@
             tabPage1 = new TabPage();
             linkLabel1 = new LinkLabel();
             fileSystemWatcher1 = new FileSystemWatcher();
-            label5 = new Label();
             tabControl1.SuspendLayout();
             UnlockerTabPage.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -68,15 +69,16 @@
             tabControl1.Controls.Add(UnlockerTabPage);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(12, 12);
+            tabControl1.Location = new Point(0, 0);
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(560, 349);
+            tabControl1.Size = new Size(683, 358);
             tabControl1.TabIndex = 0;
             // 
             // UnlockerTabPage
             // 
+            UnlockerTabPage.Controls.Add(label6);
             UnlockerTabPage.Controls.Add(label5);
             UnlockerTabPage.Controls.Add(label4);
             UnlockerTabPage.Controls.Add(button5);
@@ -88,10 +90,31 @@
             UnlockerTabPage.Location = new Point(4, 24);
             UnlockerTabPage.Name = "UnlockerTabPage";
             UnlockerTabPage.Padding = new Padding(3);
-            UnlockerTabPage.Size = new Size(552, 321);
+            UnlockerTabPage.Size = new Size(675, 330);
             UnlockerTabPage.TabIndex = 0;
             UnlockerTabPage.Text = "Unlocker";
             UnlockerTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BorderStyle = BorderStyle.FixedSingle;
+            label6.Location = new Point(181, 17);
+            label6.Name = "label6";
+            label6.Size = new Size(87, 17);
+            label6.TabIndex = 7;
+            label6.Text = "Очередь: xxx";
+            label6.Click += label6_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BorderStyle = BorderStyle.FixedSingle;
+            label5.Location = new Point(8, 236);
+            label5.Name = "label5";
+            label5.Size = new Size(42, 17);
+            label5.TabIndex = 6;
+            label5.Text = "label5";
             // 
             // label4
             // 
@@ -118,7 +141,7 @@
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
             label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Location = new Point(6, 293);
+            label3.Location = new Point(6, 302);
             label3.Name = "label3";
             label3.Size = new Size(42, 17);
             label3.TabIndex = 3;
@@ -128,7 +151,7 @@
             // Logs
             // 
             Logs.Anchor = AnchorStyles.Right;
-            Logs.Location = new Point(215, 1);
+            Logs.Location = new Point(338, 6);
             Logs.Name = "Logs";
             Logs.Size = new Size(328, 307);
             Logs.TabIndex = 2;
@@ -172,7 +195,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(552, 321);
+            tabPage2.Size = new Size(675, 330);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Config";
             tabPage2.UseVisualStyleBackColor = true;
@@ -307,7 +330,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(552, 321);
+            tabPage1.Size = new Size(675, 330);
             tabPage1.TabIndex = 2;
             tabPage1.Text = "Info";
             tabPage1.UseVisualStyleBackColor = true;
@@ -329,27 +352,17 @@
             fileSystemWatcher1.EnableRaisingEvents = true;
             fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BorderStyle = BorderStyle.FixedSingle;
-            label5.Location = new Point(8, 236);
-            label5.Name = "label5";
-            label5.Size = new Size(42, 17);
-            label5.TabIndex = 6;
-            label5.Text = "label5";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(584, 361);
+            ClientSize = new Size(684, 361);
             Controls.Add(tabControl1);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximumSize = new Size(600, 400);
-            MinimumSize = new Size(600, 400);
+            MaximumSize = new Size(700, 400);
+            MinimumSize = new Size(700, 400);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "|ASK  - DBDUnlocker by S4CBS|";
@@ -385,12 +398,14 @@
         private Button button6;
         private ComboBox comboBox2;
         private Label label4;
-        public static CheckBox checkBox3;
         private Button button7;
         private TextBox textBox1;
+        private Label label5;
+
+        public static Label label6;
+        public static CheckBox checkBox3;
         public static CheckBox checkBox1;
         public static ListView Logs;
         public static CheckBox checkBox2;
-        private Label label5;
     }
 }

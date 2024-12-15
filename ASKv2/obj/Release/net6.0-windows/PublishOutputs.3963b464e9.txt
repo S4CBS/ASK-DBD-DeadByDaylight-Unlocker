@@ -1,0 +1,13 @@
+E:\ASKpublish\ASKv2.exe
+E:\ASKpublish\BasicFormatsForCore.dll
+E:\ASKpublish\ASKv2.dll
+E:\ASKpublish\ASKv2.deps.json
+E:\ASKpublish\ASKv2.runtimeconfig.json
+E:\ASKpublish\ASKv2.dll.config
+E:\ASKpublish\ASKv2.pdb
+E:\ASKpublish\BCMakeCert.dll
+E:\ASKpublish\DotNetZip.dll
+E:\ASKpublish\FiddlerCore.dll
+E:\ASKpublish\Telerik.NetworkConnections.dll
+E:\ASKpublish\Newtonsoft.Json.dll
+E:\ASKpublish\System.ComponentModel.Composition.dll

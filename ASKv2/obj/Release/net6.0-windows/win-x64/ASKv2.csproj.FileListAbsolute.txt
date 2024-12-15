@@ -1,5 +1,6 @@
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\win-x64\BasicFormatsForCore.dll
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\win-x64\ASKv2.exe
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\win-x64\ASKv2.dll.config
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\win-x64\ASKv2.deps.json
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\win-x64\ASKv2.runtimeconfig.json
 E:\ASK-DBD-DeadByDaylight-Unlocker-main\ASKv2\bin\Release\net6.0-windows\win-x64\ASKv2.dll
