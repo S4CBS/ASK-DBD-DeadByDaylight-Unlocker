@@ -1,0 +1,17 @@
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\bin\Release\net6.0\TestHttp.exe
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\bin\Release\net6.0\TestHttp.deps.json
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\bin\Release\net6.0\TestHttp.runtimeconfig.json
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\bin\Release\net6.0\TestHttp.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\bin\Release\net6.0\TestHttp.pdb
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.GeneratedMSBuildEditorConfig.editorconfig
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.AssemblyInfoInputs.cache
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.AssemblyInfo.cs
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.csproj.CoreCompileInputs.cache
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\refint\TestHttp.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.pdb
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.genruntimeconfig.cache
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\ref\TestHttp.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\bin\Release\net6.0\Newtonsoft.Json.dll
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.csproj.AssemblyReference.cache
+E:\ASK-DBD-DeadByDaylight-Unlocker-main\testDBDpyscript\TestHttp\TestHttp\obj\Release\net6.0\TestHttp.csproj.Up2Date

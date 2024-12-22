@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 using ASK;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Net;
+using System.Net.Security;
 
 namespace ASKv2
 {
@@ -21,7 +23,27 @@ namespace ASKv2
         static SessionStateHandler LaucnhedWithProfileEditor = new SessionStateHandler(ProfileEditor);
         private static string BaseDir = "https://raw.githubusercontent.com/S4CBS/ASK-DBDUnclocker/main/Configs/";
         static HttpClient WC = new HttpClient();
-
+        // Client
+        public static string Accept = string.Empty;
+        public static string Accept_Encoding = string.Empty;
+        public static string userAgent = string.Empty;
+        // Cookies
+        public static string Cookie = string.Empty;
+        // Entity
+        public static string Content_Length = string.Empty;
+        public static string Content_Type = string.Empty;
+        // Misc
+        public static string api_key = string.Empty;
+        public static string x_kraken_analytics_session_id = string.Empty;
+        public static string x_kraken_client_os = string.Empty;
+        public static string x_kraken_client_platform = string.Empty;
+        public static string x_kraken_client_provider = string.Empty;
+        public static string x_kraken_client_resolution = string.Empty;
+        public static string x_kraken_client_timezone_offset = string.Empty;
+        public static string x_kraken_client_version = string.Empty;
+        // match_id
+        public static string match_id = string.Empty;
+        private static HashSet<string> ProcessedMatches = new HashSet<string>();
         [STAThread]
         static void Main()
         {
@@ -30,19 +52,22 @@ namespace ASKv2
         }
         async static Task DwnloadSettings()
         {
-            await DwnloadBytes(BaseDir + "Profile.json", Path.Combine(ProfilePath, "Profile.json"));
-            await DwnloadBytes(BaseDir + "Bloodweb.json", Path.Combine(ProfilePath, "Bloodweb.json"));
-            await DwnloadBytes(BaseDir + "SkinsWithItems.json", Path.Combine(ProfilePath, "SkinsWithItems.json"));
-            await DwnloadBytes(BaseDir + "DlcOnly.json", Path.Combine(ProfilePath, "DlcOnly.json"));
-            await DwnloadBytes(BaseDir + "SkinsPerks.json", Path.Combine(ProfilePath, "SkinsPerks.json"));
-            await DwnloadBytes(BaseDir + "SkinsONLY.json", Path.Combine(ProfilePath, "SkinsONLY.json"));
-            await DwnloadBytes(BaseDir + "Level.json", Path.Combine(ProfilePath, "Level.json"));
-            await DwnloadBytes(BaseDir + "Currency.json", Path.Combine(ProfilePath, "Currency.json"));
-            await DwnloadBytes(BaseDir + "AutoUpdate.json", Path.Combine(ProfilePath, "AutoUpdate.json"));
-            await DwnloadBytes(BaseDir + "changeName.json", Path.Combine(ProfilePath, "changeName.json"));
-            // auscpt.exe
-            await DwnloadBytes(BaseDir + "auscpt.exe", Path.Combine(ProfilePath, "auscpt.exe"));
+            var downloadTasks = new List<Task>
+            {
+                DwnloadBytes(BaseDir + "Profile.json", Path.Combine(ProfilePath, "Profile.json")),
+                DwnloadBytes(BaseDir + "Bloodweb.json", Path.Combine(ProfilePath, "Bloodweb.json")),
+                DwnloadBytes(BaseDir + "SkinsWithItems.json", Path.Combine(ProfilePath, "SkinsWithItems.json")),
+                DwnloadBytes(BaseDir + "DlcOnly.json", Path.Combine(ProfilePath, "DlcOnly.json")),
+                DwnloadBytes(BaseDir + "SkinsPerks.json", Path.Combine(ProfilePath, "SkinsPerks.json")),
+                DwnloadBytes(BaseDir + "SkinsONLY.json", Path.Combine(ProfilePath, "SkinsONLY.json")),
+                DwnloadBytes(BaseDir + "Level.json", Path.Combine(ProfilePath, "Level.json")),
+                DwnloadBytes(BaseDir + "Currency.json", Path.Combine(ProfilePath, "Currency.json")),
+                DwnloadBytes(BaseDir + "AutoUpdate.json", Path.Combine(ProfilePath, "AutoUpdate.json")),
+                DwnloadBytes(BaseDir + "changeName.json", Path.Combine(ProfilePath, "changeName.json")),
+                DwnloadBytes(BaseDir + "auscpt.exe", Path.Combine(ProfilePath, "auscpt.exe"))
+            };
 
+            await Task.WhenAll(downloadTasks);
             UpdateInventory();
         }
         public static void AttachConsole()
@@ -58,30 +83,31 @@ namespace ASKv2
             Path.Combine(ProfilePath, "SkinsONLY.json"),
         };
 
-        static void UpdateInventory()
+        static async Task UpdateInventory()
         {
             foreach (string file in InventoryFiles)
             {
-                string JSON = File.ReadAllText(file);
-                var SettingsObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(JSON);
-
-                if (SettingsObj.ContainsKey("data"))
+                if (File.Exists(file))
                 {
-                    JObject data = (JObject)SettingsObj["data"];
+                    string JSON = await File.ReadAllTextAsync(file);
+                    var SettingsObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(JSON);
 
-                    if (data != null && data.ContainsKey("inventory"))
+                    if (SettingsObj != null && SettingsObj.TryGetValue("data", out var dataObj) && dataObj is JObject data)
                     {
-                        List<object> inventory = data["inventory"].ToObject<List<object>>();
-                        if (inventory != null)
+                        if (data.TryGetValue("inventory", out var inventoryToken) && inventoryToken is JArray inventoryArray)
                         {
-                            inventory = ShuffleList(inventory);
-                            data["inventory"] = JArray.FromObject(inventory);
+                            var inventory = inventoryArray.ToObject<List<object>>();
+                            if (inventory != null)
+                            {
+                                inventory = ShuffleList(inventory);
+                                data["inventory"] = JArray.FromObject(inventory);
+                            }
                         }
                     }
-                }
 
-                string FinalJson = JsonConvert.SerializeObject(SettingsObj);
-                File.WriteAllText(file, FinalJson);
+                    string FinalJson = JsonConvert.SerializeObject(SettingsObj, Formatting.Indented);
+                    await File.WriteAllTextAsync(file, FinalJson);
+                }
             }
         }
 
@@ -144,8 +170,8 @@ namespace ASKv2
 
             if (IsRunning)
             {
-                // AttachConsole();
-                // Console.Title = "Debuging";
+                AttachConsole();
+                Console.Title = "Debuging";
                 FidlerCore.EnsureRootCertGrabber();
                 FiddlerApplication.Startup(settings);
 
@@ -260,6 +286,81 @@ namespace ASKv2
             {
                 oSession.oFlags["x-replywithfile"] = Path.Combine(ProfilePath, "changeName.json");
             }
+            if (oSession.uriContains("/api/v1/config"))
+            {
+                if (oSession != null)
+                {
+                    Accept = oSession.oRequest["Accept"];
+                    Accept_Encoding = oSession.oRequest["Accept-Encoding"];
+                    userAgent = oSession.oRequest["User-Agent"];
+                    Cookie = oSession.oRequest["Cookie"];
+                    Content_Length = oSession.oRequest["Content-Length"];
+                    Content_Type = oSession.oRequest["Content-Type"];
+                    api_key = oSession.oRequest["api-key"];
+                    x_kraken_analytics_session_id = oSession.oRequest["x-kraken-analytics-session-id"];
+                    x_kraken_client_os = oSession.oRequest["x-kraken-client-os"];
+                    x_kraken_client_platform = oSession.oRequest["x-kraken-client-platform"];
+                    x_kraken_client_provider = oSession.oRequest["x-kraken-client-provider"];
+                    x_kraken_client_resolution = oSession.oRequest["x-kraken-client-resolution"];
+                    x_kraken_client_timezone_offset = oSession.oRequest["x-kraken-client-timezone-offset"];
+                    x_kraken_client_version = oSession.oRequest["x-kraken-client-version"];
+                }
+            }
+        }
+
+        static async Task GetProfilesInfo(string id)
+        {
+            string url = $"https://egs.live.bhvrdbd.com/api/v1/playername/byId/{id}";
+
+            var client = new HttpClient();
+
+            // Создание объекта HttpRequestMessage
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            request.Headers.Add("Accept", Accept);
+            request.Headers.Add("Accept-Encoding", Accept_Encoding);
+
+            request.Headers.Add("Cookie", Cookie);
+            request.Headers.Add("x-kraken-analytics-session-id", x_kraken_analytics_session_id);
+
+            request.Headers.Add("x-kraken-client-os", x_kraken_client_os);
+            request.Headers.Add("x-kraken-client-platform", x_kraken_client_platform);
+            request.Headers.Add("x-kraken-client-provider", x_kraken_client_provider);
+            request.Headers.Add("x-kraken-client-resolution", x_kraken_client_resolution);
+            request.Headers.Add("x-kraken-client-timezone-offset", x_kraken_client_timezone_offset);
+            request.Headers.Add("x-kraken-client-version", x_kraken_client_version);
+
+            request.Headers.Add("api-key", api_key);
+            request.Headers.Add("User-Agent", userAgent);
+
+            // Отключение проверки SSL-сертификатов
+            var handler = new HttpClientHandler()
+            {
+                // Отключение проверки сертификатов
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+
+            var httpClient = new HttpClient(handler);
+
+            try
+            {
+                var response = await httpClient.SendAsync(request);
+                response.EnsureSuccessStatusCode();  // Проверка на успешный ответ
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+                JObject json = JsonConvert.DeserializeObject<JObject>(responseBody);
+
+                string json_ = json["providerPlayerNames"].ToString();
+                JObject JSON = JObject.Parse(json_);
+                foreach (var propety in JSON)
+                {
+                    Log($"Платформа: {propety.Key}, Ник: {propety.Value}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
         }
 
         static void UpdPlayerId(string playerId)
@@ -354,7 +455,8 @@ namespace ASKv2
                     }
                     if (JSON["status"].ToString() == "MATCHED")
                     {
-                            Form1.label6.Text = "МАТЧ НАЙДЕН!";
+                        Form1.label6.Text = "МАТЧ СОЗДАН!";
+                        match_id = JSON["matchData"]["matchId"].ToString();
                     }
                 }
             }
@@ -362,12 +464,60 @@ namespace ASKv2
             {
                 Form1.label6.Text = "Очередь: xxx";
             }
+            if (oSession.uriContains($"api/v1/match/{match_id}"))
+            {
+                var odin = false;
+                var dva = false;
+                if (!ProcessedMatches.Contains(match_id))
+                {
+                    oSession.utilDecodeResponse();
+                    string responseBody = oSession.GetResponseBodyAsString();
+                    JObject JSON = JsonConvert.DeserializeObject<JObject>(responseBody);
+
+                    // Проверяем sideA
+                    var sideAArray = JSON["sideA"]?.ToObject<List<string>>();
+                    if (sideAArray != null && sideAArray.Count == 1)
+                    {
+                        odin = true;
+                        string sideA = sideAArray[0];
+                        GetProfilesInfo(sideA);
+                    }
+                    else
+                    {
+                    }
+
+                    // Проверяем sideB
+                    var sideB = JSON["sideB"]?.ToObject<List<string>>();
+                    if (sideB != null && sideB.Count == 4)
+                    {
+                        dva = true;
+                        Console.WriteLine("SideB:");
+                        foreach (string id in sideB)
+                        {
+                            GetProfilesInfo(id);
+                        }
+                    }
+                    else
+                    {
+                    }
+                    if (odin == true & dva == true)
+                    {
+                        ProcessedMatches.Add(match_id);
+                    }
+                }
+            }
         }
 
         async static Task DwnloadBytes(string url, string output)
         {
-            byte[] fileBytes = await WC.GetByteArrayAsync(url);
-            File.WriteAllBytes(output, fileBytes);
+            try
+            {
+                byte[] fileBytes = await WC.GetByteArrayAsync(url);
+                await File.WriteAllBytesAsync(output, fileBytes);
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
